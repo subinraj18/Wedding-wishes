@@ -30,6 +30,14 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+.app-shell {
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   min-width: 320px;
@@ -322,11 +330,12 @@ input {
 .top-nav {
   width: min(1140px, 100%);
   margin: 0 auto;
-  padding: 20px 24px;
+  padding: 20px max(24px, env(safe-area-inset-right)) 20px max(24px, env(safe-area-inset-left));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  flex-wrap: wrap;
+  gap: 10px 14px;
 }
 
 .brand {
@@ -542,7 +551,7 @@ input {
 /* ---------- Wish cards ---------- */
 .wishes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
   gap: 28px;
   align-items: stretch;
 }
@@ -745,7 +754,8 @@ input {
   backdrop-filter: blur(5px);
   display: grid;
   place-items: center;
-  padding: 20px;
+  padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right))
+    max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
 }
 
 .modal-card {
@@ -955,7 +965,7 @@ input {
 
 /* ---------- Footer ---------- */
 .site-footer {
-  padding: 32px 16px;
+  padding: 32px 16px calc(32px + env(safe-area-inset-bottom));
   text-align: center;
   background: var(--wine);
   color: #d9c7a6;
@@ -975,10 +985,22 @@ input {
   color: var(--gold-bright);
 }
 
-/* ---------- Mobile ---------- */
+/* ---------- Tablet ---------- */
+@media (max-width: 900px) {
+  .main-content {
+    padding: 44px 20px 80px;
+  }
+
+  .wishes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+  }
+}
+
+/* ---------- Phone ---------- */
 @media (max-width: 600px) {
   .top-nav {
-    padding: 16px;
+    padding: 14px 16px;
   }
 
   .brand {
@@ -986,39 +1008,195 @@ input {
   }
 
   .ghost-button {
-    padding: 7px 12px;
+    padding: 8px 14px;
     font-size: 10.5px;
   }
 
+  .login-arch {
+    padding: 52px 20px 36px;
+    border-radius: 50% 50% 18px 18px / 120px 120px 18px 18px;
+  }
+
+  .bismillah {
+    font-size: 21px;
+  }
+
+  .hero-header {
+    padding-bottom: 40px;
+  }
+
   .hero-arch {
-    padding: 58px 18px 32px;
-    border-radius: 200px 200px 0 0 / 150px 150px 0 0;
+    padding: 52px 14px 28px;
+    border-radius: 50% 50% 0 0 / 120px 120px 0 0;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+
+  .hero-date {
+    font-size: 13px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+  }
+
+  .stats-row {
+    gap: 18px;
+  }
+
+  .stat span {
+    font-size: 36px;
   }
 
   .main-content {
-    padding: 36px 16px 64px;
+    padding: 32px 16px 56px;
+  }
+
+  .toolbar {
+    margin-bottom: 30px;
   }
 
   .wishes-grid {
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 20px;
   }
 
   .wish-card {
+    padding: 30px 20px 18px;
     border-radius: 80px 80px 14px 14px / 56px 56px 14px 14px;
   }
 
+  .icon-heart {
+    right: 28px;
+  }
+
+  .wish-message {
+    font-size: 20px;
+  }
+
+  .empty-state {
+    padding: 44px 8px;
+  }
+
   .modal-card {
-    padding: 50px 22px 26px;
-    border-radius: 110px 110px 14px 14px / 65px 65px 14px 14px;
+    padding: 52px 20px 24px;
+    border-radius: 50% 50% 14px 14px / 70px 70px 14px 14px;
+  }
+
+  .modal-message {
+    font-size: 21px;
   }
 
   .modal-actions {
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .modal-actions .fav-button {
+    grid-column: 1 / -1;
+    order: -1;
+  }
+
+  .export-card {
+    padding: 56px 16px 22px;
+  }
+
+  .export-sub {
+    font-size: 17px;
   }
 
   .layout-options {
     grid-template-columns: 1fr;
+  }
+
+  .layout-option {
+    display: grid;
+    grid-template-columns: 62px 1fr;
+    grid-template-areas: "preview title" "preview text";
+    column-gap: 14px;
+    row-gap: 4px;
+    align-items: center;
+    text-align: left;
+    padding: 12px 14px;
+  }
+
+  .layout-option .layout-preview {
+    grid-area: preview;
+    width: 56px;
+    height: 74px;
+    padding: 6px;
+    gap: 4px;
+  }
+
+  .layout-option strong {
+    grid-area: title;
+    align-self: end;
+  }
+
+  .layout-option small {
+    grid-area: text;
+    align-self: start;
+    font-size: 15px;
+  }
+
+  .site-footer .arabic {
+    font-size: 20px;
+  }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 380px) {
+  .top-nav {
+    justify-content: center;
+  }
+
+  .brand {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-arch .bismillah {
+    font-size: 18px;
+  }
+
+  .pill {
+    padding: 7px 13px;
+  }
+}
+
+/* ---------- Touch devices ---------- */
+@media (hover: none) {
+  .wish-card:hover,
+  .layout-option:hover:not(:disabled),
+  .primary-button:hover:not(:disabled) {
+    transform: none;
+  }
+}
+
+@media (pointer: coarse) {
+  .ghost-button,
+  .text-button,
+  .pill,
+  .fav-button {
+    min-height: 42px;
+  }
+
+  .icon-heart {
+    width: 44px;
+    height: 44px;
+    top: 22px;
+    right: 22px;
+  }
+
+  .modal-close {
+    width: 44px;
+    height: 44px;
+  }
+
+  .muted-link,
+  .danger-link {
+    padding: 10px 10px;
   }
 }
 
