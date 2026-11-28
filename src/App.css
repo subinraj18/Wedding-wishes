@@ -589,7 +589,7 @@ input {
   border-color: var(--gold);
   background:
     var(--star),
-    linear-gradient(180deg, #fffaf1 0%, #f8e9df 100%);
+    linear-gradient(180deg, #ffb0b0 0%, #f8e9df 100%);
 }
 
 .quote-mark {

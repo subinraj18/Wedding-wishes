@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -547,11 +548,15 @@ export default function App() {
             {filteredWishes.map((wish) => {
               const isConfirming = confirmDeleteId === wish.id;
               return (
-                <article
-                  key={wish.id}
-                  className={`wish-card${wish.favorite ? " is-fav" : ""}`}
-                  onClick={() => setActiveWishId(wish.id)}
-                >
+                <motion.article
+  key={wish.id}
+  className={`wish-card${wish.favorite ? " is-fav" : ""}`}
+  onClick={() => setActiveWishId(wish.id)}
+  initial={{ opacity: 0, y: 24 }}
+  animate={{ opacity: 1, y: 0 }}
+  whileHover={{ y: -5, scale: 1.02 }}
+  transition={{ duration: 0.45, ease: "easeOut" }}
+>
                   <button
                     type="button"
                     className={`icon-heart no-print${wish.favorite ? " active" : ""}`}
@@ -619,7 +624,7 @@ export default function App() {
                       )}
                     </div>
                   </footer>
-                </article>
+                </motion.article>
               );
             })}
           </section>
