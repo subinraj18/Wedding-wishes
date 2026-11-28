@@ -635,7 +635,8 @@ export default function App() {
         <p className="arabic" lang="ar">
           جَمَعَ اللَّهُ بَيْنَكُمَا فِي خَيْرٍ
         </p>
-        <p>With love, {COUPLE.bride} &amp; {COUPLE.groom}</p>
+        <p>With love, {COUPLE.bride} 
+          &amp; {COUPLE.groom}</p>
       </footer>
 
       {activeWish && (
